@@ -1,6 +1,6 @@
 use petgraph::graph::DiGraph;
 
-use crate::Graph;
+use crate::algorithms::common::Graph;
 
 /// Builds the graph used in the paper.
 pub fn input() -> Graph {

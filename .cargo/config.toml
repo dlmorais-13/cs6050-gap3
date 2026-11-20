@@ -1,0 +1,5 @@
+[alias]
+run-bellman-ford = "run bellman-ford"
+run-early-termination = "run early-termination"
+run-yen = "run yen"
+run-random-yen = "run random-yen"

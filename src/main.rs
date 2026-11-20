@@ -1,6 +1,7 @@
-// use ascii_petgraph::RenderedGraph;
+use std::env;
+
 use ascii_dag::{BoxedNode, Direction, Graph as DagGraph, LayoutConfig, RenderOptions};
-use gap_3::{Graph, bellman_ford, paper_input};
+use gap_3::{algorithms::{bellman_ford::bellman_ford, common::Graph, early_termination::bellman_ford_early_termination, random_yen::random_yen, yen::yen}, inputs::paper_input};
 use petgraph::visit::EdgeRef;
 
 fn main() {
@@ -8,8 +9,18 @@ fn main() {
     let graph = paper_input::input();
     print_graph(&graph);
 
+    let args: Vec<String> = env::args().collect();
+    let algo = args[1].as_str();
+
+    let tree = match algo {
+        "bellman-ford" => bellman_ford(&graph),
+        "early-termination" => bellman_ford_early_termination(&graph),
+        "yen" => yen(&graph),
+        "random-yen" => random_yen(&graph),
+        _ => panic!("Unknown implementation: {}.", algo)
+    };
+
     println!("::::: Shortest Path Tree :::::");
-    let tree = bellman_ford(&graph);
     print_graph(&tree);
 }
 
